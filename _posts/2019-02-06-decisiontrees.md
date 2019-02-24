@@ -1,6 +1,7 @@
 ---
 title: "Decision Tree"
 date: 2019-02-06
+read_time: 10 min
 excerpt: ""
 ---
 
