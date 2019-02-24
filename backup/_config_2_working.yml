@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "Gaurav Kumar"
-  avatar           : "/images/profile_pic.jpg"
+  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "India, New Delhi"
   email            :
