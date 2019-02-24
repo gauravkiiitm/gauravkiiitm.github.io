@@ -5,15 +5,17 @@ read_time: 10 min
 excerpt: ""
 ---
 
-%%html
-<style>
-body {
-    font-family: "Comic Sans MS", cursive, sans-serif;
+
 
 
 
 
 ```python
+
+%%html
+<style>
+body {
+    font-family: "Comic Sans MS", cursive, sans-serif;
 # Python ≥3.5 is required
 import sys
 assert sys.version_info >= (3, 5)
@@ -48,7 +50,14 @@ def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
     print("Saving figure", fig_id)
     if tight_layout:
         plt.tight_layout()
-    plt.savefig(path, format=fig_extension, dpi=resolution)
+    plt.savefig(path, format=fig_extension, dpi=resolution)}
+
+    </style>
+
+
+
+
+
 ```
 
 # Training and visualizing
@@ -212,5 +221,3 @@ plt.title("min_samples_leaf = {}".format(deep_tree_clf2.min_samples_leaf), fonts
 save_fig("min_samples_leaf_plot")
 plt.show()
 ```
-}
-</style>
