@@ -1,10 +1,7 @@
 ---
 title: "Decision Tree"
+date: 2019-02-06
 excerpt: "A bunch of text to test readability."
-tags:
-  - sample post
-  - readability
-  - test
 ---
 
 
