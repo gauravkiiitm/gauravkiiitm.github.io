@@ -110,7 +110,7 @@ author:
   avatar           : "/images/profile_pic.jpg"
   bio              : "Data Science Portfolio"
   location         : "India, New Delhi"
-  email            :
+  email            : "kumargaurav.iiitm@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -301,3 +301,5 @@ defaults:
     values:
       layout: single
       author_profile: true
+      read_time: true
+      comments: true
