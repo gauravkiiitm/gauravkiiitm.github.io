@@ -2,7 +2,7 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Machine Learning"
+  - title: "Decision Tree"
     url: /machine-learning/
 
 
