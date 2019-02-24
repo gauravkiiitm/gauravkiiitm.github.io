@@ -9,8 +9,7 @@ excerpt: ""
 <style>
 body {
     font-family: "Comic Sans MS", cursive, sans-serif;
-}
-</style>
+
 
 
 
@@ -213,3 +212,5 @@ plt.title("min_samples_leaf = {}".format(deep_tree_clf2.min_samples_leaf), fonts
 save_fig("min_samples_leaf_plot")
 plt.show()
 ```
+}
+</style>
