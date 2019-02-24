@@ -12,10 +12,7 @@ excerpt: ""
 
 ```python
 
-%%html
-<style>
-body {
-    font-family: "Comic Sans MS", cursive, sans-serif;
+
 # Python ≥3.5 is required
 import sys
 assert sys.version_info >= (3, 5)
@@ -51,11 +48,6 @@ def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
     if tight_layout:
         plt.tight_layout()
     plt.savefig(path, format=fig_extension, dpi=resolution)}
-
-    </style>
-
-
-
 
 
 ```

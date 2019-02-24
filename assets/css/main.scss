@@ -1,7 +1,17 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 
+
+body {
+    font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+    font-size: 21px;
+    line-height: 1.42857143;
+    color: #777777;
+    background-color: #ffffff
+}
+
 ---
+
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | mint: 'mint' }}"; // skin
