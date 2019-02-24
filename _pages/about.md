@@ -1,7 +1,9 @@
 ---
 title: "About"
 permalink: /about/
-author_profile: true
+title: "Machine Learning Posts by Tags"
+author-profile: true
+
 header:
   image: "/images/water.jpg"
 
