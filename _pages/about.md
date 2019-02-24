@@ -1,6 +1,7 @@
 ---
 title: "About"
 permalink: /about/
+author-profile: true
 header:
   image: "/images/waterfront.jpg"
 
