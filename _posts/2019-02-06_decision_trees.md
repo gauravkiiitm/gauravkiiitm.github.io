@@ -9,14 +9,6 @@ tags:
 
 
 
-**Chapter 6 – Decision Trees**
-
-_This notebook contains all the sample code and solutions to the exercises in chapter 6._
-
-# Setup
-
-First, let's import a few common modules, ensure MatplotLib plots figures inline and prepare a function to save the figures. We also check that Python 3.5 or later is installed (although Python 2.x may work, it is deprecated so we strongly recommend you use Python 3 instead), as well as Scikit-Learn ≥0.20.
-
 
 ```python
 # Python ≥3.5 is required
@@ -74,15 +66,6 @@ tree_clf.fit(X, y)
 
 
 
-    DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=2,
-                max_features=None, max_leaf_nodes=None,
-                min_impurity_decrease=0.0, min_impurity_split=None,
-                min_samples_leaf=1, min_samples_split=2,
-                min_weight_fraction_leaf=0.0, presort=False, random_state=42,
-                splitter='best')
-
-
-
 
 ```python
 from graphviz import Source
@@ -102,8 +85,6 @@ Source.from_file(os.path.join(IMAGES_PATH, "iris_tree.dot"))
 
 
 
-
-![svg](06_decision_trees_files/06_decision_trees_7_0.svg)
 
 
 
@@ -150,11 +131,9 @@ save_fig("decision_tree_decision_boundaries_plot")
 plt.show()
 ```
 
-    Saving figure decision_tree_decision_boundaries_plot
 
 
 
-![png](06_decision_trees_files/06_decision_trees_8_1.png)
 
 
 # Predicting classes and class probabilities
@@ -166,20 +145,10 @@ tree_clf.predict_proba([[5, 1.5]])
 
 
 
-
-    array([[0.        , 0.90740741, 0.09259259]])
-
-
-
-
 ```python
 tree_clf.predict([[5, 1.5]])
 ```
 
-
-
-
-    array([1])
 
 
 
@@ -189,11 +158,6 @@ tree_clf.predict([[5, 1.5]])
 ```python
 X[(X[:, 1]==X[:, 1][y==1].max()) & (y==1)] # widest Iris-Versicolor flower
 ```
-
-
-
-
-    array([[4.8, 1.8]])
 
 
 
@@ -210,15 +174,6 @@ tree_clf_tweaked.fit(X_tweaked, y_tweaked)
 
 
 
-    DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=2,
-                max_features=None, max_leaf_nodes=None,
-                min_impurity_decrease=0.0, min_impurity_split=None,
-                min_samples_leaf=1, min_samples_split=2,
-                min_weight_fraction_leaf=0.0, presort=False, random_state=40,
-                splitter='best')
-
-
-
 
 ```python
 plt.figure(figsize=(8, 4))
@@ -231,12 +186,6 @@ plt.text(1.0, 1.80, "Depth=1", fontsize=13)
 save_fig("decision_tree_instability_plot")
 plt.show()
 ```
-
-    Saving figure decision_tree_instability_plot
-
-
-
-![png](06_decision_trees_files/06_decision_trees_15_1.png)
 
 
 
@@ -260,384 +209,3 @@ plt.title("min_samples_leaf = {}".format(deep_tree_clf2.min_samples_leaf), fonts
 save_fig("min_samples_leaf_plot")
 plt.show()
 ```
-
-    Saving figure min_samples_leaf_plot
-
-
-
-![png](06_decision_trees_files/06_decision_trees_16_1.png)
-
-
-
-```python
-angle = np.pi / 180 * 20
-rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
-Xr = X.dot(rotation_matrix)
-
-tree_clf_r = DecisionTreeClassifier(random_state=42)
-tree_clf_r.fit(Xr, y)
-
-plt.figure(figsize=(8, 3))
-plot_decision_boundary(tree_clf_r, Xr, y, axes=[0.5, 7.5, -1.0, 1], iris=False)
-
-plt.show()
-```
-
-
-![png](06_decision_trees_files/06_decision_trees_17_0.png)
-
-
-
-```python
-np.random.seed(6)
-Xs = np.random.rand(100, 2) - 0.5
-ys = (Xs[:, 0] > 0).astype(np.float32) * 2
-
-angle = np.pi / 4
-rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
-Xsr = Xs.dot(rotation_matrix)
-
-tree_clf_s = DecisionTreeClassifier(random_state=42)
-tree_clf_s.fit(Xs, ys)
-tree_clf_sr = DecisionTreeClassifier(random_state=42)
-tree_clf_sr.fit(Xsr, ys)
-
-plt.figure(figsize=(11, 4))
-plt.subplot(121)
-plot_decision_boundary(tree_clf_s, Xs, ys, axes=[-0.7, 0.7, -0.7, 0.7], iris=False)
-plt.subplot(122)
-plot_decision_boundary(tree_clf_sr, Xsr, ys, axes=[-0.7, 0.7, -0.7, 0.7], iris=False)
-
-save_fig("sensitivity_to_rotation_plot")
-plt.show()
-```
-
-    Saving figure sensitivity_to_rotation_plot
-
-
-
-![png](06_decision_trees_files/06_decision_trees_18_1.png)
-
-
-# Regression trees
-
-
-```python
-# Quadratic training set + noise
-np.random.seed(42)
-m = 200
-X = np.random.rand(m, 1)
-y = 4 * (X - 0.5) ** 2
-y = y + np.random.randn(m, 1) / 10
-```
-
-
-```python
-from sklearn.tree import DecisionTreeRegressor
-
-tree_reg = DecisionTreeRegressor(max_depth=2, random_state=42)
-tree_reg.fit(X, y)
-```
-
-
-
-
-    DecisionTreeRegressor(criterion='mse', max_depth=2, max_features=None,
-               max_leaf_nodes=None, min_impurity_decrease=0.0,
-               min_impurity_split=None, min_samples_leaf=1,
-               min_samples_split=2, min_weight_fraction_leaf=0.0,
-               presort=False, random_state=42, splitter='best')
-
-
-
-
-```python
-from sklearn.tree import DecisionTreeRegressor
-
-tree_reg1 = DecisionTreeRegressor(random_state=42, max_depth=2)
-tree_reg2 = DecisionTreeRegressor(random_state=42, max_depth=3)
-tree_reg1.fit(X, y)
-tree_reg2.fit(X, y)
-
-def plot_regression_predictions(tree_reg, X, y, axes=[0, 1, -0.2, 1], ylabel="$y$"):
-    x1 = np.linspace(axes[0], axes[1], 500).reshape(-1, 1)
-    y_pred = tree_reg.predict(x1)
-    plt.axis(axes)
-    plt.xlabel("$x_1$", fontsize=18)
-    if ylabel:
-        plt.ylabel(ylabel, fontsize=18, rotation=0)
-    plt.plot(X, y, "b.")
-    plt.plot(x1, y_pred, "r.-", linewidth=2, label=r"$\hat{y}$")
-
-plt.figure(figsize=(11, 4))
-plt.subplot(121)
-plot_regression_predictions(tree_reg1, X, y)
-for split, style in ((0.1973, "k-"), (0.0917, "k--"), (0.7718, "k--")):
-    plt.plot([split, split], [-0.2, 1], style, linewidth=2)
-plt.text(0.21, 0.65, "Depth=0", fontsize=15)
-plt.text(0.01, 0.2, "Depth=1", fontsize=13)
-plt.text(0.65, 0.8, "Depth=1", fontsize=13)
-plt.legend(loc="upper center", fontsize=18)
-plt.title("max_depth=2", fontsize=14)
-
-plt.subplot(122)
-plot_regression_predictions(tree_reg2, X, y, ylabel=None)
-for split, style in ((0.1973, "k-"), (0.0917, "k--"), (0.7718, "k--")):
-    plt.plot([split, split], [-0.2, 1], style, linewidth=2)
-for split in (0.0458, 0.1298, 0.2873, 0.9040):
-    plt.plot([split, split], [-0.2, 1], "k:", linewidth=1)
-plt.text(0.3, 0.5, "Depth=2", fontsize=13)
-plt.title("max_depth=3", fontsize=14)
-
-save_fig("tree_regression_plot")
-plt.show()
-```
-
-    Saving figure tree_regression_plot
-
-
-
-![png](06_decision_trees_files/06_decision_trees_22_1.png)
-
-
-
-```python
-export_graphviz(
-        tree_reg1,
-        out_file=os.path.join(IMAGES_PATH, "regression_tree.dot"),
-        feature_names=["x1"],
-        rounded=True,
-        filled=True
-    )
-```
-
-
-```python
-Source.from_file(os.path.join(IMAGES_PATH, "regression_tree.dot"))
-```
-
-
-
-
-![svg](06_decision_trees_files/06_decision_trees_24_0.svg)
-
-
-
-
-```python
-tree_reg1 = DecisionTreeRegressor(random_state=42)
-tree_reg2 = DecisionTreeRegressor(random_state=42, min_samples_leaf=10)
-tree_reg1.fit(X, y)
-tree_reg2.fit(X, y)
-
-x1 = np.linspace(0, 1, 500).reshape(-1, 1)
-y_pred1 = tree_reg1.predict(x1)
-y_pred2 = tree_reg2.predict(x1)
-
-plt.figure(figsize=(11, 4))
-
-plt.subplot(121)
-plt.plot(X, y, "b.")
-plt.plot(x1, y_pred1, "r.-", linewidth=2, label=r"$\hat{y}$")
-plt.axis([0, 1, -0.2, 1.1])
-plt.xlabel("$x_1$", fontsize=18)
-plt.ylabel("$y$", fontsize=18, rotation=0)
-plt.legend(loc="upper center", fontsize=18)
-plt.title("No restrictions", fontsize=14)
-
-plt.subplot(122)
-plt.plot(X, y, "b.")
-plt.plot(x1, y_pred2, "r.-", linewidth=2, label=r"$\hat{y}$")
-plt.axis([0, 1, -0.2, 1.1])
-plt.xlabel("$x_1$", fontsize=18)
-plt.title("min_samples_leaf={}".format(tree_reg2.min_samples_leaf), fontsize=14)
-
-save_fig("tree_regression_regularization_plot")
-plt.show()
-```
-
-    Saving figure tree_regression_regularization_plot
-
-
-
-![png](06_decision_trees_files/06_decision_trees_25_1.png)
-
-
-# Exercise solutions
-
-## 1. to 6.
-
-See appendix A.
-
-## 7.
-
-_Exercise: train and fine-tune a Decision Tree for the moons dataset._
-
-a. Generate a moons dataset using `make_moons(n_samples=10000, noise=0.4)`.
-
-Adding `random_state=42` to make this notebook's output constant:
-
-
-```python
-from sklearn.datasets import make_moons
-
-X, y = make_moons(n_samples=10000, noise=0.4, random_state=42)
-```
-
-b. Split it into a training set and a test set using `train_test_split()`.
-
-
-```python
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-```
-
-c. Use grid search with cross-validation (with the help of the `GridSearchCV` class) to find good hyperparameter values for a `DecisionTreeClassifier`. Hint: try various values for `max_leaf_nodes`.
-
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-params = {'max_leaf_nodes': list(range(2, 100)), 'min_samples_split': [2, 3, 4]}
-grid_search_cv = GridSearchCV(DecisionTreeClassifier(random_state=42), params, verbose=1, cv=3)
-
-grid_search_cv.fit(X_train, y_train)
-```
-
-    Fitting 3 folds for each of 294 candidates, totalling 882 fits
-
-
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    [Parallel(n_jobs=1)]: Done 882 out of 882 | elapsed:    9.3s finished
-
-
-
-
-
-    GridSearchCV(cv=3, error_score='raise-deprecating',
-           estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
-                max_features=None, max_leaf_nodes=None,
-                min_impurity_decrease=0.0, min_impurity_split=None,
-                min_samples_leaf=1, min_samples_split=2,
-                min_weight_fraction_leaf=0.0, presort=False, random_state=42,
-                splitter='best'),
-           fit_params=None, iid='warn', n_jobs=None,
-           param_grid={'max_leaf_nodes': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99], 'min_samples_split': [2, 3, 4]},
-           pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
-           scoring=None, verbose=1)
-
-
-
-
-```python
-grid_search_cv.best_estimator_
-```
-
-
-
-
-    DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
-                max_features=None, max_leaf_nodes=17,
-                min_impurity_decrease=0.0, min_impurity_split=None,
-                min_samples_leaf=1, min_samples_split=2,
-                min_weight_fraction_leaf=0.0, presort=False, random_state=42,
-                splitter='best')
-
-
-
-d. Train it on the full training set using these hyperparameters, and measure your model's performance on the test set. You should get roughly 85% to 87% accuracy.
-
-By default, `GridSearchCV` trains the best model found on the whole training set (you can change this by setting `refit=False`), so we don't need to do it again. We can simply evaluate the model's accuracy:
-
-
-```python
-from sklearn.metrics import accuracy_score
-
-y_pred = grid_search_cv.predict(X_test)
-accuracy_score(y_test, y_pred)
-```
-
-
-
-
-    0.8695
-
-
-
-## 8.
-
-_Exercise: Grow a forest._
-
-a. Continuing the previous exercise, generate 1,000 subsets of the training set, each containing 100 instances selected randomly. Hint: you can use Scikit-Learn's `ShuffleSplit` class for this.
-
-
-```python
-from sklearn.model_selection import ShuffleSplit
-
-n_trees = 1000
-n_instances = 100
-
-mini_sets = []
-
-rs = ShuffleSplit(n_splits=n_trees, test_size=len(X_train) - n_instances, random_state=42)
-for mini_train_index, mini_test_index in rs.split(X_train):
-    X_mini_train = X_train[mini_train_index]
-    y_mini_train = y_train[mini_train_index]
-    mini_sets.append((X_mini_train, y_mini_train))
-```
-
-b. Train one Decision Tree on each subset, using the best hyperparameter values found above. Evaluate these 1,000 Decision Trees on the test set. Since they were trained on smaller sets, these Decision Trees will likely perform worse than the first Decision Tree, achieving only about 80% accuracy.
-
-
-```python
-from sklearn.base import clone
-
-forest = [clone(grid_search_cv.best_estimator_) for _ in range(n_trees)]
-
-accuracy_scores = []
-
-for tree, (X_mini_train, y_mini_train) in zip(forest, mini_sets):
-    tree.fit(X_mini_train, y_mini_train)
-
-    y_pred = tree.predict(X_test)
-    accuracy_scores.append(accuracy_score(y_test, y_pred))
-
-np.mean(accuracy_scores)
-```
-
-
-
-
-    0.8054499999999999
-
-
-
-c. Now comes the magic. For each test set instance, generate the predictions of the 1,000 Decision Trees, and keep only the most frequent prediction (you can use SciPy's `mode()` function for this). This gives you _majority-vote predictions_ over the test set.
-
-
-```python
-Y_pred = np.empty([n_trees, len(X_test)], dtype=np.uint8)
-
-for tree_index, tree in enumerate(forest):
-    Y_pred[tree_index] = tree.predict(X_test)
-```
-
-
-```python
-from scipy.stats import mode
-
-y_pred_majority_votes, n_votes = mode(Y_pred, axis=0)
-```
-
-d. Evaluate these predictions on the test set: you should obtain a slightly higher accuracy than your first model (about 0.5 to 1.5% higher). Congratulations, you have trained a Random Forest classifier!
-
-
-```python
-accuracy_score(y_test, y_pred_majority_votes.reshape([-1]))
-```
-
-
-
-
-    0.872
