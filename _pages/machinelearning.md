@@ -1,7 +1,7 @@
 ---
 layout: posts
 permalink: /machine-learning/
-title: "Decision Tree"
+title: "Machine Learning"
 author-profile: true
 header:
   image: "/images/fort_point.jpg"
