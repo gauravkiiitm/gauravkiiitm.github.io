@@ -6,10 +6,6 @@ excerpt: ""
 ---
 
 
-
-
-
-
 ```python
 
 
